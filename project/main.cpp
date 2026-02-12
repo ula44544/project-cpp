@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Шифрование 
+// ГГЁГґГ°Г®ГўГ Г­ГЁГҐ 
 string vigenereEncrypt(const string& text, const string& key) {
     string result = text;
     for (size_t i = 0; i < text.size(); ++i) {
@@ -17,7 +17,7 @@ string vigenereEncrypt(const string& text, const string& key) {
     return result;
 }
 
-// Расшифровка
+// ГђГ Г±ГёГЁГґГ°Г®ГўГЄГ 
 string vigenereDecrypt(const string& text, const string& key) {
     string result = text;
     for (size_t i = 0; i < text.size(); ++i) {
@@ -33,34 +33,34 @@ int main() {
     setlocale(LC_ALL, "");
 
     while (true) {
-        cout << "\n=== МЕНЮ ===\n";
-        cout << "1. Зашифровать сообщение\n";
-        cout << "2. Расшифровать сообщение\n";
-        cout << "3. Выход\n";
-        cout << "Выбор: ";
+        cout << "\n=== ГЊГ…ГЌГћ ===\n";
+        cout << "1. Г‡Г ГёГЁГґГ°Г®ГўГ ГІГј Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ\n";
+        cout << "2. ГђГ Г±ГёГЁГґГ°Г®ГўГ ГІГј Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ\n";
+        cout << "3. Г‚Г»ГµГ®Г¤\n";
+        cout << "Г‚Г»ГЎГ®Г°: ";
 
         int choice;
         cin >> choice;
         cin.ignore();
 
         if (choice == 3) {
-            cout << "Работа завершена.\n";
+            cout << "ГђГ ГЎГ®ГІГ  Г§Г ГўГҐГ°ГёГҐГ­Г .\n";
             break;
         }
 
         if (choice == 1) {
             string message;
-            cout << "Введите сообщение: ";
+            cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ: ";
             getline(cin, message);
 
             int keyCount;
-            cout << "Количество ключей: ";
+            cout << "ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ«ГѕГ·ГҐГ©: ";
             cin >> keyCount;
             cin.ignore();
 
             vector<string> keys(keyCount);
             for (int i = 0; i < keyCount; ++i) {
-                cout << "Введите ключ " << i + 1 << ": ";
+                cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ«ГѕГ· " << i + 1 << ": ";
                 getline(cin, keys[i]);
             }
 
@@ -70,24 +70,24 @@ int main() {
             }
 
             string filePath;
-            cout << "Введите путь к файлу для записи: ";
+            cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЇГіГІГј ГЄ ГґГ Г©Г«Гі Г¤Г«Гї Г§Г ГЇГЁГ±ГЁ: ";
             getline(cin, filePath);
 
             ofstream out(filePath, ios::binary);
             out.write(encrypted.data(), encrypted.size());
             out.close();
 
-            cout << "Сообщение успешно зашифровано и сохранено.\n";
+            cout << "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ ГіГ±ГЇГҐГёГ­Г® Г§Г ГёГЁГґГ°Г®ГўГ Г­Г® ГЁ Г±Г®ГµГ°Г Г­ГҐГ­Г®.\n";
         }
 
         else if (choice == 2) {
             string filePath;
-            cout << "Введите путь к файлу: ";
+            cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЇГіГІГј ГЄ ГґГ Г©Г«Гі: ";
             getline(cin, filePath);
 
             ifstream in(filePath, ios::binary);
             if (!in) {
-                cout << "Ошибка открытия файла.\n";
+                cout << "ГЋГёГЁГЎГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г .\n";
                 continue;
             }
 
@@ -98,28 +98,28 @@ int main() {
             in.close();
 
             int keyCount;
-            cout << "Количество ключей: ";
+            cout << "ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ«ГѕГ·ГҐГ©: ";
             cin >> keyCount;
             cin.ignore();
 
             vector<string> keys(keyCount);
             for (int i = 0; i < keyCount; ++i) {
-                cout << "Введите ключ " << i + 1 << ": ";
+                cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ«ГѕГ· " << i + 1 << ": ";
                 getline(cin, keys[i]);
             }
 
-            // Расшифровка в обратном порядке
+            // ГђГ Г±ГёГЁГґГ°Г®ГўГЄГ  Гў Г®ГЎГ°Г ГІГ­Г®Г¬ ГЇГ®Г°ГїГ¤ГЄГҐ
             string decrypted = encrypted;
             for (int i = keyCount - 1; i >= 0; --i) {
                 decrypted = vigenereDecrypt(decrypted, keys[i]);
             }
 
-            cout << "\nИсходное сообщение:\n";
+            cout << "\nГ€Г±ГµГ®Г¤Г­Г®ГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ:\n";
             cout << decrypted << endl;
         }
 
         else {
-            cout << "Неверный пункт меню.\n";
+            cout << "ГЌГҐГўГҐГ°Г­Г»Г© ГЇГіГ­ГЄГІ Г¬ГҐГ­Гѕ.\n";
         }
     }
 
