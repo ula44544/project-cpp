@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Øèôðîâàíèå 
+// shbifrovka 
 string vigenereEncrypt(const string& text, const string& key) {
     string result = text;
     for (size_t i = 0; i < text.size(); ++i) {
@@ -17,7 +17,7 @@ string vigenereEncrypt(const string& text, const string& key) {
     return result;
 }
 
-// Ðàñøèôðîâêà
+// rashifrovka
 string vigenereDecrypt(const string& text, const string& key) {
     string result = text;
     for (size_t i = 0; i < text.size(); ++i) {
@@ -33,34 +33,34 @@ int main() {
     setlocale(LC_ALL, "");
 
     while (true) {
-        cout << "\n=== ÌÅÍÞ ===\n";
-        cout << "1. Çàøèôðîâàòü ñîîáùåíèå\n";
-        cout << "2. Ðàñøèôðîâàòü ñîîáùåíèå\n";
-        cout << "3. Âûõîä\n";
-        cout << "Âûáîð: ";
+        cout << "\n=== МЕНЮ ===\n";
+        cout << "1. Зашифровать сообщение\n";
+        cout << "2. Расшифровать сообщение\n";
+        cout << "3. Выход\n";
+        cout << "Выбор: ";
 
         int choice;
         cin >> choice;
         cin.ignore();
 
         if (choice == 3) {
-            cout << "Ðàáîòà çàâåðøåíà.\n";
+            cout << "Работа завершена.\n";
             break;
         }
 
         if (choice == 1) {
             string message;
-            cout << "Ââåäèòå ñîîáùåíèå: ";
+            cout << "Введите сообщение: ";
             getline(cin, message);
 
             int keyCount;
-            cout << "Êîëè÷åñòâî êëþ÷åé: ";
+            cout << "Количество ключей: ";
             cin >> keyCount;
             cin.ignore();
 
             vector<string> keys(keyCount);
             for (int i = 0; i < keyCount; ++i) {
-                cout << "Ââåäèòå êëþ÷ " << i + 1 << ": ";
+                cout << "Введите ключ " << i + 1 << ": ";
                 getline(cin, keys[i]);
             }
 
@@ -70,24 +70,24 @@ int main() {
             }
 
             string filePath;
-            cout << "Ââåäèòå ïóòü ê ôàéëó äëÿ çàïèñè: ";
+            cout << "Введите путь к файлу для записи: ";
             getline(cin, filePath);
 
             ofstream out(filePath, ios::binary);
             out.write(encrypted.data(), encrypted.size());
             out.close();
 
-            cout << "Ñîîáùåíèå óñïåøíî çàøèôðîâàíî è ñîõðàíåíî.\n";
+            cout << "Сообщение успешно зашифровано и сохранено.\n";
         }
 
         else if (choice == 2) {
             string filePath;
-            cout << "Ââåäèòå ïóòü ê ôàéëó: ";
+            cout << "Введите путь к файлу: ";
             getline(cin, filePath);
 
             ifstream in(filePath, ios::binary);
             if (!in) {
-                cout << "Îøèáêà îòêðûòèÿ ôàéëà.\n";
+                cout << "Ошибка открытия файла.\n";
                 continue;
             }
 
@@ -98,28 +98,28 @@ int main() {
             in.close();
 
             int keyCount;
-            cout << "Êîëè÷åñòâî êëþ÷åé: ";
+            cout << "Количество ключей: ";
             cin >> keyCount;
             cin.ignore();
 
             vector<string> keys(keyCount);
             for (int i = 0; i < keyCount; ++i) {
-                cout << "Ââåäèòå êëþ÷ " << i + 1 << ": ";
+                cout << "Введите ключ " << i + 1 << ": ";
                 getline(cin, keys[i]);
             }
 
-            // Ðàñøèôðîâêà â îáðàòíîì ïîðÿäêå
+            // rashifrovka v obratnom poryadke
             string decrypted = encrypted;
             for (int i = keyCount - 1; i >= 0; --i) {
                 decrypted = vigenereDecrypt(decrypted, keys[i]);
             }
 
-            cout << "\nÈñõîäíîå ñîîáùåíèå:\n";
+            cout << "\nИсходное сообщение:\n";
             cout << decrypted << endl;
         }
 
         else {
-            cout << "Íåâåðíûé ïóíêò ìåíþ.\n";
+            cout << "Неверный пункт меню.\n";
         }
     }
 
